@@ -1,0 +1,49 @@
+﻿@model List<Vehicles>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if( TempData["successMsg"]!=null)
+{
+    <div class="alert alert-success">
+        @TempData["successMsg"]
+    </div>
+}
+
+@if (TempData["updateMsg"]!= null)
+{
+    <div class="alert alert-success">
+        @TempData["updateMsg"]
+    </div>
+}
+
+<a asp-action="AddVehicles" class="btn btn-info">Add Vehicles</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Vehicle ID</th>
+            <th >Vehicle Name</th>
+            <th>Vehicle Category</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var d in Model)
+        {
+            <tr>
+                <td>@d.VehicleId</td>
+                <th style="color:darkred">@d.VehicleName</th>
+                <td>@d.Category</td>
+                <td>@d.Description</td>
+                <td>
+                    <a asp-action="DeleteVehicles" asp-controller="Vehical" asp-route-id="@d.VehicleId" onclick='return confirm("are you sure??")' class="btn btn-danger">Delete</a>
+                    <a asp-action="Update" asp-controller="Vehical" asp-route-id="@d.VehicleId" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+       
+       
+    </tbody>
+</table>
